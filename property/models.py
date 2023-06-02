@@ -49,6 +49,7 @@ class Flat(models.Model):
         db_index=True)
     new_building = models.BooleanField('Является новостройкой', blank=True, null=True)
     like = models.ManyToManyField(User, verbose_name = 'Кто лайкнул',
+        related_name="liked_flats",
         blank=True, null=True)
 
     def __str__(self):
