@@ -5,7 +5,11 @@ import phonenumbers
 from django.db.models import Case, Value, When, F
 
 def valid_number(number):
-    return phonenumbers.is_valid_number(phonenumbers.parse(number, 'RU'))
+    try:
+        phonenumber = phonenumbers.parse(number, 'RU')
+    except phonenumbers.phonenumberutil.NumberParseException:
+            return None
+    return phonenumbers.is_valid_number(phonenumber)
 
 def copy_number(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
