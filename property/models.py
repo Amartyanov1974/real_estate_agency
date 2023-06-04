@@ -66,6 +66,9 @@ class Complaint(models.Model):
         verbose_name = 'Текст жалобы',
         null=True, blank=True,)
 
+    def __str__(self):
+        return f'{self.user} про {self.flat}'
+
 class Owner(models.Model):
     owner = models.CharField('ФИО владельца', db_index=True,
         max_length=200)
