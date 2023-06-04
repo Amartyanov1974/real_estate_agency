@@ -13,23 +13,12 @@ def valid_number(number):
 
 def copy_number(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-
-    #Flat.objects.filter(valid_number(owners_phonenumber)).update(phonenumbers.format_number(phonenumbers.parse(owners_phonenumber, 'RU'), phonenumbers.PhoneNumberFormat.E164))
-
-
-    #Flat.objects.filter(valid_number(F('owners_phonenumber'))).update(phonenumbers.format_number(phonenumbers.parse(F('owners_phonenumber'), 'RU'), phonenumbers.PhoneNumberFormat.E164))
-
-
-    #Flat.objects.update(owner_pure_phone=Case(When(valid_number(F('owners_phonenumber')),
-    #        then=Value(phonenumbers.format_number(phonenumbers.parse(F('owners_phonenumber', 'RU')), phonenumbers.PhoneNumberFormat.E164))
-    #        )))
-
-    for flat in Flat.objects.all():
-        if valid_number(flat.owners_phonenumber):
-            flat.owner_pure_phone = phonenumbers.format_number(phonenumbers.parse(flat.owners_phonenumber,
+    flats = Flat.objects.all()
+    for flat in flats.iterator():
+        if valid_number(flat.phonenumber):
+            flat.pure_phone = phonenumbers.format_number(phonenumbers.parse(flat.phonenumber,
                                                                'RU'), phonenumbers.PhoneNumberFormat.E164)
             flat.save()
-
 
 
 class Migration(migrations.Migration):
