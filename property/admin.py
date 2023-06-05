@@ -9,10 +9,10 @@ class FlatsInline(admin.TabularInline):
 
 @admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
-    list_display = ['town','address', 'price',# 'owner',
+    list_display = ['town','address', 'price',
                     'new_building', 'construction_year']
     list_editable =['new_building',]
-    search_fields = ['town','address',#'owner',
+    search_fields = ['town','address',
                     ]
     readonly_fields = ["created_at"]
     list_filter = ['new_building', 'rooms_number',
@@ -26,6 +26,6 @@ class ComplaintAdmin(admin.ModelAdmin):
 
 @admin.register(Owner)   
 class OwnerAdmin(admin.ModelAdmin):
-    search_fields = ['owner',]
+    search_fields = ['name',]
     raw_id_fields = ['flats']
     inlines = [FlatsInline]

@@ -71,7 +71,7 @@ class Complaint(models.Model):
         return f'{self.user} про {self.flat}'
 
 class Owner(models.Model):
-    owner = models.CharField('ФИО владельца', db_index=True,
+    name = models.CharField('ФИО владельца', db_index=True,
         max_length=200)
     pure_phone = PhoneNumberField('Нормализованный номер владельца',
         db_index=True, blank=True, null=True)
@@ -82,4 +82,4 @@ class Owner(models.Model):
         related_name='owners', null=True, blank=True)
 
     def __str__(self):
-        return self.owner
+        return self.name
